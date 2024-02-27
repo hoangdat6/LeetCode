@@ -1,7 +1,6 @@
 class Solution {
 public:
     int diameterOfBinaryTree(TreeNode* root) {
-        // Define a helper function to calculate the diameter recursively
         int res = 0;
         diameter(root, res);
         return res;
