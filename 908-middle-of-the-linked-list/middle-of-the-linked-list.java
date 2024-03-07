@@ -13,16 +13,17 @@ class Solution {
         ListNode tmp = head;
 
         int cnt = 0;
-        while(tmp != null){
-            cnt ++;
-            tmp = tmp.next;
-        }
         int i = 0;
-        while(i < cnt / 2){
+        while(head != null){
+            cnt++;
+            if(cnt / 2 > i){
+                ++i;
+                tmp = tmp.next;
+            }
+            
             head = head.next;
-            i++;
         }
-
-        return head;
+        
+        return tmp;
     }
 }
