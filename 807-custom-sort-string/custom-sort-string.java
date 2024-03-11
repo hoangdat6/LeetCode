@@ -5,21 +5,21 @@ class Solution {
         for(char c : s.toCharArray()){
             ch[c - 'a']++;
         }
-        String re = "";
+        StringBuilder re = new StringBuilder();
         for(char c : order.toCharArray()){
             while(ch[c - 'a'] != 0){
-                re += c;
+                re.append(c);
                 ch[c - 'a']--;
             }
         }
 
         for(int i = 0; i < 26; i++){
             while(ch[i] != 0){
-                re += (char)('a' + i);
+                re.append((char)('a' + i));
                 ch[i]--;
             }
         }
 
-        return re;
+        return re.toString();
     }
 }
