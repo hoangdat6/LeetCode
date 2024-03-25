@@ -1,12 +1,12 @@
 class Solution {
     public List<Integer> findDuplicates(int[] nums) {
-        Map<Integer, Integer> map = new HashMap<>();
+        int[] cnt = new int[nums.length + 1];
 
         List<Integer> re = new ArrayList<>();
         for(int i = 0; i < nums.length; ++i){
-            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+            cnt[nums[i]]++;
 
-            if(map.get(nums[i]) == 2){
+            if(cnt[nums[i]] == 2){
                 re.add(nums[i]);
             }
         }
