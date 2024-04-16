@@ -26,8 +26,8 @@ class Solution {
 
     void add(TreeNode root, int val, int depth, int cnt){
         if(cnt == depth - 1 && root != null){
-            TreeNode left = (root.left == null) ? null : root.left;
-            TreeNode right = (root.right == null) ? null : root.right;
+            TreeNode left = root.left;
+            TreeNode right = root.right;
 
             root.left = new TreeNode(val, left, null);
             root.right = new TreeNode(val, null, right);
