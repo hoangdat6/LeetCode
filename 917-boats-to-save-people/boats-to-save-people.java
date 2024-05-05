@@ -11,21 +11,17 @@ class Solution {
         int left = 0, right = limit;
 
         while(left <= right){
-            while(left < limit && buckets[left] == 0) left++;
-            while(right > 0 && buckets[right] == 0) right--;
+            while(left <= right && buckets[left] <= 0) left++;
+            while(left <= right && buckets[right] <= 0) right--;
 
-            if(left > right) break;
-            if(left == right && buckets[left] == 1){
-                re++; break;
-            }
+            if(buckets[left] <= 0 && buckets[right] <= 0) break;
+            re++;
 
             if(left + right <= limit){
-                buckets[left]--; buckets[right]--;
-            }else{
-                buckets[right]--;
+                buckets[left]--;
             }
+            buckets[right]--;
 
-            re++;
         }
 
         return re;
