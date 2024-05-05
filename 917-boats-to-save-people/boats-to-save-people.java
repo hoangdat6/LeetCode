@@ -14,10 +14,10 @@ class Solution {
             while(left < limit && buckets[left] == 0) left++;
             while(right > 0 && buckets[right] == 0) right--;
 
+            if(left > right) break;
             if(left == right && buckets[left] == 1){
                 re++; break;
             }
-            if(left > right) break;
 
             if(left + right <= limit){
                 buckets[left]--; buckets[right]--;
