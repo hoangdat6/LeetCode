@@ -1,20 +1,32 @@
 class Solution {
     public int numRescueBoats(int[] p, int limit) {
-        Arrays.sort(p);
-
-        int n = p.length;
         int re = 0;
-        int left = 0, right = n - 1;
+        
+        int[] buckets = new int[limit + 1];
 
-        while(left < right){
-            if(p[left] + p[right] <= limit){
-                ++left; --right;
-            }else{
-                --right;
-            }
-            ++re;
+        for(int i : p){
+            buckets[i]++;
         }
-        if(left == right) ++re;
+
+        int left = 0, right = limit;
+
+        while(left <= right){
+            while(left < limit && buckets[left] == 0) left++;
+            while(right > 0 && buckets[right] == 0) right--;
+
+            if(left == right && buckets[left] == 1){
+                re++; break;
+            }
+            if(left > right) break;
+
+            if(left + right <= limit){
+                buckets[left]--; buckets[right]--;
+            }else{
+                buckets[right]--;
+            }
+
+            re++;
+        }
 
         return re;
     }
