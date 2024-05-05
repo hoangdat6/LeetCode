@@ -8,13 +8,13 @@ class Solution {
 
         while(left < right){
             if(p[left] + p[right] <= limit){
-                left++; right--;
+                ++left; --right;
             }else{
-                right--;
+                --right;
             }
-            re++;
+            ++re;
         }
-        if(left == right) re++;
+        if(left == right) ++re;
 
         return re;
     }
