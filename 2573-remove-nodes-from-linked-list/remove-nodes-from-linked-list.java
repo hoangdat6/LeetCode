@@ -10,41 +10,43 @@
  */
 class Solution {
     public ListNode removeNodes(ListNode head) {
-        Stack<ListNode> st = new Stack<>();
+        ListNode prevNode = head;
+        ListNode currentNode = head.next;
 
-        ListNode tmp = head;
-        while(tmp != null) {
-            st.push(tmp);
-            tmp = tmp.next;
+        while(currentNode != null){
+            ListNode nextNode = currentNode.next; 
+            currentNode.next = prevNode;
+            prevNode = currentNode;
+            currentNode = nextNode;
         }
+        head.next = null;
+        head = prevNode;
 
-        ListNode max = st.pop();                        
-
-        while(!st.isEmpty()) {
-            ListNode node = st.peek();
-            if(max.val > node.val) {
-                st.pop();
-                ListNode n1;
-                if(!st.isEmpty()){
-                    n1 = st.peek();
-                }else {
-                    break;
-                }
-                n1.next = max;
-                if(n1.val > max.val) max = n1;
-            }else {
-                max = st.pop();
-            }
-        }
-
-        tmp = head;
-        while(tmp != null){
-            if(tmp == max){
-                head = max;
-                break;
+        ListNode tmp = head.next;
+        ListNode max = head;
+        while(tmp.next != null){
+            if(max.val <= tmp.val) {
+                max.next = tmp;
+                max = tmp;
             }
             tmp = tmp.next;
         }
+
+        if(max != tmp && tmp != null && tmp.val < max.val) {
+            max.next = null;
+        }
+
+        prevNode = head;
+        currentNode = head.next;
+
+        while(currentNode != null){
+            ListNode nextNode = currentNode.next; 
+            currentNode.next = prevNode;
+            prevNode = currentNode;
+            currentNode = nextNode;
+        }
+        head.next = null;
+        head = prevNode;
 
         return head;
     }
