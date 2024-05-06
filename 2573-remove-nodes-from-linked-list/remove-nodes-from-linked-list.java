@@ -19,7 +19,6 @@ class Solution {
         }
 
         ListNode max = st.pop();                        
-        System.out.println(max.val);
 
         while(!st.isEmpty()) {
             ListNode node = st.peek();
@@ -32,7 +31,6 @@ class Solution {
                     break;
                 }
                 n1.next = max;
-                System.out.println(n1.val + " " + max.val);
                 if(n1.val > max.val) max = n1;
             }else {
                 max = st.pop();
