@@ -14,37 +14,31 @@
  * }
  */
 class Solution {
-    public int countPairs(TreeNode root, int distance) {
-        Map<TreeNode, List<TreeNode>> map = new HashMap<>();
-        List<TreeNode> leaves = new ArrayList<>();
-        findLeaves(root, new ArrayList<>(), leaves, map);
-        int res = 0;
-        for (int i = 0; i < leaves.size(); i++) {
-            for (int j = i + 1; j < leaves.size(); j++) {
-                List<TreeNode> list_i = map.get(leaves.get(i));
-                List<TreeNode> list_j = map.get(leaves.get(j));
-                for (int k = 0; k < Math.min(list_i.size(), list_j.size()); k++) {
-                    if (list_i.get(k) != list_j.get(k)) {
-                        int dist = list_i.size() - k + list_j.size() - k;
-                        if (dist <= distance) res++;
-                        break;
-                    }
-                }
-            }
-        }
-        return res;
-    }
+  int res = 0;
 
-    private void findLeaves(TreeNode node, List<TreeNode> trail, List<TreeNode> leaves, Map<TreeNode, List<TreeNode>> map) {
-        if (node == null) return;
-        List<TreeNode> tmp = new ArrayList<>(trail);
-        tmp.add(node);
-        if (node.left == null && node.right == null) {
-            map.put(node, tmp);
-            leaves.add(node);
-            return;
-        }
-        findLeaves(node.left, tmp, leaves, map);
-        findLeaves(node.right, tmp, leaves, map);
-    }
+  private int[] dfs(TreeNode node, int distance) {
+    var map = new int[11];
+
+    if (node == null) return map;
+
+    if (node.left == null && node.right == null)
+      map[1] = 1;
+
+    var left = dfs(node.left, distance);
+    var right = dfs(node.right, distance);
+
+    for (var i = 1; i < distance; i++)
+      for (var j = 1; j <= distance - i; j++)
+        res += (left[i] * right[j]);
+
+    for (var i=2; i<11; i++)
+      map[i] += left[i-1] + right[i-1];
+
+    return map;
+  }
+
+  public int countPairs(TreeNode root, int distance) {
+    dfs(root, distance);
+    return res;
+  }
 }
