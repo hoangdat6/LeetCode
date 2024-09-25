@@ -7,7 +7,6 @@ class Solution {
 
         for(int i = length - 1; i >= 0; i--) {
             table[i] = minExtraCharAt(s, length, dictionary , i, table, root);
-            System.out.print(table[i] + " ");
         }
 
         return table[0];
@@ -16,7 +15,7 @@ class Solution {
     private static int minExtraCharAt(String s, int length, String[] dictionary, int i, int[] table, Trie node) {
         int opt = 1 + table[i + 1];
         int index = i;
-        
+
         while(index < length) {
             char c = s.charAt(index++);
 
