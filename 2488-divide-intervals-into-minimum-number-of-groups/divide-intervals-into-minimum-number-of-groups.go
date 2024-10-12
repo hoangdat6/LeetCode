@@ -1,21 +1,25 @@
 func minGroups(intervals [][]int) int {
-	sort.Slice(intervals, func(i, j int) bool { return intervals[i][0] < intervals[j][0] })
-	q := hp{}
-	for _, e := range intervals {
-		if q.Len() > 0 && q.IntSlice[0] < e[0] {
-			heap.Pop(&q)
-		}
-		heap.Push(&q, e[1])
-	}
-	return q.Len()
-}
+    rangeStart := math.MaxInt
+    rangeEnd := math.MinInt
+    for _, interval := range intervals {
+        rangeStart = min(rangeStart, interval[0])
+        rangeEnd = max(rangeEnd, interval[1])
+    }
 
-type hp struct{ sort.IntSlice }
+    pointToCount := make([]int, rangeEnd + 2)
 
-func (h *hp) Push(v any) { h.IntSlice = append(h.IntSlice, v.(int)) }
-func (h *hp) Pop() any {
-	a := h.IntSlice
-	v := a[len(a)-1]
-	h.IntSlice = a[:len(a)-1]
-	return v
+    for _, interval := range intervals {
+        pointToCount[interval[0]]++
+        pointToCount[interval[1] + 1]--
+    }
+
+
+    concurrentIntervals := 0
+    maxConcurrentIntervals := 0
+    for i := rangeStart; i <= rangeEnd; i++ {
+        concurrentIntervals += pointToCount[i]
+        maxConcurrentIntervals = max(maxConcurrentIntervals, concurrentIntervals)
+    }
+
+    return maxConcurrentIntervals
 }
