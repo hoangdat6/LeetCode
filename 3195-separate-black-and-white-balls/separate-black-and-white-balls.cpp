@@ -1,6 +1,8 @@
 class Solution {
 public:
     long long minimumSteps(string s) {
+        ios::sync_with_stdio(0);
+        cin.tie(0);
         long long n = s.size();
         long long ans = 0;
 
