@@ -16,7 +16,6 @@ func reverseWords(s string) string {
         }
     }
 
-    fmt.Println(start)
 
     if(isWord) {
         ans += s[0:start + 1] + " "
