@@ -1,6 +1,9 @@
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
+          ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
         long long product = 1;
         
         int cnt0 = 0, cnt = 0;
