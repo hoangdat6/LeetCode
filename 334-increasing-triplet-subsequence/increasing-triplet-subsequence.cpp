@@ -1,23 +1,19 @@
 class Solution {
 public:
     bool increasingTriplet(vector<int>& nums) {
-        vector<long> v(3, 2147483648);
+        int first_small = INT_MAX;
+        int second_small = INT_MAX;
 
         for(int i = 0; i < nums.size(); ++i) {
-            if(nums[i] <= v[0]) {
-                v[0] = nums[i];
+            if(nums[i] <= first_small) {
+                first_small = nums[i];
+            }else if(nums[i] <= second_small) {
+                second_small = nums[i];
             }else {
-                if(nums[i] <= v[1]) {
-                    v[1] = nums[i];
-                }else {
-                    if(nums[i] <= v[2]) {
-                        v[2] = nums[i];
-                    }
-                }
+                return true;
             }
         } 
     
-
-        return !(v[2] == 2147483648);
+        return false;
     }
 };
