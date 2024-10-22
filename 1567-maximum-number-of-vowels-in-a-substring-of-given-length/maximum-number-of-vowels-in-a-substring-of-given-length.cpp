@@ -1,20 +1,34 @@
 class Solution {
 public:
-    int maxVowels(std::string s, int k) {
-        std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
+    int maxVowels(string s, int k) {
         int cnt = 0;
 
-        for (int i = 0; i < k; ++i) {
-            cnt += vowels.count(s[i]);
-        }
+        for(int i = 0; i < k; ++i) {
+            if(isVowels(s[i])) {
+                ++cnt;
+            }
+        } 
 
         int ans = cnt;
 
-        for (int i = k; i < s.size(); ++i) {
-            cnt += vowels.count(s[i]) - vowels.count(s[i - k]);
-            ans = std::max(ans, cnt);
+        for(int i = k; i < s.size(); ++i) {
+            if(isVowels(s[i - k])) {
+                cnt--;
+            }
+
+            if(isVowels(s[i])) {
+                cnt++;
+            }
+            ans = max(ans, cnt);
+        }
+        return ans;
+    }
+
+    bool isVowels(char c) {
+        if(c == 'a' || c == 'o' || c == 'u' || c == 'i' || c == 'e') {
+            return true;
         }
 
-        return ans;
+        return false;
     }
 };
