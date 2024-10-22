@@ -1,35 +1,25 @@
 class Solution {
 public:
-Solution()
-    {
+    int maxOperations(vector<int>& nums, int k) {
         ios_base::sync_with_stdio(false); 
         cin.tie(NULL); 
         cout.tie(NULL);
         
-    }
-    int maxOperations(vector<int>& nums, int k) {
-
-        sort(nums.begin(),nums.end());
-        int start=0;
-        int end=nums.size()-1;
-        int count =0;
-
-        while(start<end){
-
-            if(nums[start]+nums[end]==k){
-                start++;
-                end--;
-                count++;
+        sort(nums.begin(), nums.end());
+        int ans = 0;
+        int l = 0, r = nums.size() - 1;
+        while(l < r) {
+            int e = k - nums[l];
+            if(e == nums[r]) {
+                ans ++;
+                l++; r--;
+            }else if(e < nums[r]) {
+                r--;
+            }else {
+                l ++;
             }
-            else if(nums[start]+nums[end]<k){
-                start++;
-            }
-            else if(nums[start]+nums[end]>k){
-                end--;
-            }
-
         }
-        return count;
-        
-     }
+
+        return ans;
+    }
 };
