@@ -1,32 +1,47 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
     long long kthLargestLevelSum(TreeNode* root, int k) {
-        if (!root) return -1; // Trường hợp cây rỗng
-        
-        queue<TreeNode*> q;
-        q.push(root);
+        queue<pair<TreeNode*, int>> q;
+        q.push({root, 0});
         vector<long long> v;
 
         while(!q.empty()) {
-            int size = q.size();
-            long long levelSum = 0;
+            pair<TreeNode*, int> tmp = q.front();
+            q.pop();
+            
+            TreeNode* curr = tmp.first;
+            int height = tmp.second;
+            int val = curr->val;
 
-            for (int i = 0; i < size; ++i) {
-                TreeNode* curr = q.front();
-                q.pop();
-                
-                levelSum += curr->val;
-
-                if (curr->left) q.push(curr->left);
-                if (curr->right) q.push(curr->right);
+            if(v.size() <= height) {
+                v.push_back(val);
+            }else {
+                v[height] += val;
             }
 
-            v.push_back(levelSum);
+            if(curr->left != NULL) {
+                q.push({curr->left, height + 1});
+            }
+
+            if(curr->right != NULL) {
+                q.push({curr->right, height + 1});
+            }
         }
 
-        if (v.size() < k) return -1;
-
         sort(v.begin(), v.end());
+
+        if(v.size() < k) return -1;
 
         return v[v.size() - k];
     }
