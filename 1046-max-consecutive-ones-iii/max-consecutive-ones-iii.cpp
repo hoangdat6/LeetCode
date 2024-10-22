@@ -1,10 +1,6 @@
-#include <vector>
-#include <algorithm>
-#include <iostream>
-
 class Solution {
 public:
-    int longestOnes(std::vector<int>& nums, int k) {
+    int longestOnes(vector<int>& nums, int k) {
         int cnt = 0; 
         int j = 0; 
 
@@ -18,7 +14,7 @@ public:
                 }
                 j++; 
             }
-            cnt = std::max(cnt, i - j + 1);
+            cnt = max(cnt, i - j + 1);
         }
 
         return cnt;
