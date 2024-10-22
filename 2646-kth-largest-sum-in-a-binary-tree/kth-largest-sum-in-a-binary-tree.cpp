@@ -24,7 +24,7 @@ public:
             int height = tmp.second;
             int val = curr->val;
 
-            if(v.size() <= height) {
+            if(v.size() == height) {
                 v.push_back(val);
             }else {
                 v[height] += val;
