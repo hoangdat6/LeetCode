@@ -11,8 +11,8 @@ public:
         double maxv = sum;
 
         for(int i = k; i < nums.size(); ++i) {
-            maxv = max(maxv, sum - nums[i - k] + nums[i]);
-            sum = sum - nums[i - k] + nums[i];
+            sum += nums[i] - nums[i - k];
+            maxv = max(maxv, sum);
         }
 
         return maxv / k;
