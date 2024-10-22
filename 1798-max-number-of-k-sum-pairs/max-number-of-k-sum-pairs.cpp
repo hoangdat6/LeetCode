@@ -5,11 +5,11 @@ public:
         int ans = 0;
         int l = 0, r = nums.size() - 1;
         while(l < r) {
-            int sum = nums[l] + nums[r];
-            if(sum == k) {
+            int e = k - nums[l];
+            if(e == nums[r]) {
                 ans ++;
                 l++; r--;
-            }else if(sum > k) {
+            }else if(e < nums[r]) {
                 r--;
             }else {
                 l ++;
