@@ -2,39 +2,34 @@ class Solution {
 public:
     int maximumRemovals(string s, string p, vector<int>& removable) {
         int n = s.size();
+        int ans = 0;
 
         int left = 0, right = removable.size();
 
-        while(left < right) {
-            int mid = left + (right - left + 1) / 2;
+        while(left <= right) {
+            int mid = left + (right - left) / 2;
+            string s1 = s;
 
-            if(checkSubsequence(s, p, removable, mid)) {
-                left = mid;
+            for(int i = 0; i < mid; ++i) {
+                s1[removable[i]] = '*';
+            }
+
+            int l = p.size(), k = 0;
+            for(int i=0; i < s1.size() && k < l; i++){
+                if(s1[i] == p[k])
+                    k++;
+            }
+
+            if(l == k) {
+                ans = mid;
+                left = mid + 1;
             }else {
                 right = mid - 1;
             }
         }
  
-        return left;
+        return ans;
     }
 
-    bool checkSubsequence(string s, string p, vector<int>& removable, int r) {
-        vector<bool> isRemoved(s.size(), false);
-        for(int i = 0; i < r; ++i) {
-            isRemoved[removable[i]] = true;
-        }
-
-        int i = 0; 
-        int j = 0;  
-
-        while (i < p.size() && j < s.size()) {
-            if (!isRemoved[j] && s[j] == p[i]) {
-                i++;
-            }
-
-            j++;
-        }
-
-        return i == p.size();
-    }
+   
 };
