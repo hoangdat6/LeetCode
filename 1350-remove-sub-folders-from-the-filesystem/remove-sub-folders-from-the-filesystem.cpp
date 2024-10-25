@@ -2,6 +2,9 @@
 class Solution {
 public:
     vector<string> removeSubfolders(vector<string>& folder) {
+        std::ios_base::sync_with_stdio(false);
+        std::cin.tie(0);
+        
         sort(folder.begin(), folder.end());
 
         vector<string> ans;
