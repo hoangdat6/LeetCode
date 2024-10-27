@@ -17,9 +17,7 @@ public:
                 }
 
                 ans += dp[i][j];
-                cout << dp[i][j] << " " ;
             }
-            cout  << endl;
         }
 
         return ans;
