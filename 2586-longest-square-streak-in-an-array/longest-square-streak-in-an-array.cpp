@@ -7,13 +7,13 @@ auto init = []() {
 class Solution {
 public:
     int longestSquareStreak(vector<int>& nums) {
-        unordered_map<long long, int> streak;
+        unordered_map<long, int> streak;
         sort(nums.begin(), nums.end());
         
         int ans = 0;
         
         for(int i = 0; i < nums.size(); ++i) {
-            long long sq = (long long)nums[i] * nums[i];
+            long sq = (long)nums[i] * nums[i];
             if (streak.find(nums[i]) != streak.end()) {
                 streak[sq] = streak[nums[i]] + 1;
             } else {
