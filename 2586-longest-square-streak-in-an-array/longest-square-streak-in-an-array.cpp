@@ -1,16 +1,27 @@
+auto init = []() { 
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(0);
+    return 0;
+} ();
+
 class Solution {
 public:
     int longestSquareStreak(vector<int>& nums) {
-        map<int, int>mp;
+        unordered_map<long, int> streak;
         sort(nums.begin(), nums.end());
-        int res = -1;
-        for(int num: nums) {
-            int _sqrt = sqrt(num);
-            if(_sqrt*_sqrt == num && mp.find(_sqrt)!=mp.end()) {
-                mp[num] = mp[_sqrt]+1;
-                res = max(res, mp[num]);
-            } else mp[num] = 1;
+        
+        int ans = 0;
+        
+        for(int i = 0; i < nums.size(); ++i) {
+            long sq = (long)nums[i] * nums[i];
+            if (streak.find(nums[i]) != streak.end()) {
+                streak[sq] = streak[nums[i]] + 1;
+            } else {
+                streak[sq] = 1;
+            }
+            ans = max(ans, streak[sq]);
         }
-        return res;
+        
+        return ans == 1 ? -1 : ans;
     }
 };
