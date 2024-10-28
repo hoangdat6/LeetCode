@@ -6,7 +6,7 @@ auto init = []() {
 class Solution {
 public:
     int longestSquareStreak(vector<int>& nums) {
-        unordered_map<long long, int> streak;
+        map<long long, int> streak;
         sort(nums.begin(), nums.end());
         
         int ans = 0;
