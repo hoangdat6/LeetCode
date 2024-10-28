@@ -8,11 +8,7 @@ public:
         
         for(int i = 0; i < nums.size(); ++i) {
             long long sq = (long long)nums[i] * nums[i];
-            if (streak.find(nums[i]) != streak.end()) {
-                streak[sq] = streak[nums[i]] + 1;
-            } else {
-                streak[sq] = 1;
-            }
+            streak[sq] = streak[(long long)nums[i]] + 1;
             ans = max(ans, streak[sq]);
         }
         
