@@ -1,6 +1,13 @@
+auto con = []{
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+};
+
+
 class Solution {
 public:
     string compressedString(string word) {
+        
         if(word.size() == 0) return "";
         string ans;
 
