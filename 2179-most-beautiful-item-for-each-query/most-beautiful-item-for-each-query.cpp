@@ -4,9 +4,7 @@ public:
         int n = queries.size();
         vector<int> ans(n);
 
-        sort(items.begin(), items.end(), [](vector<int> a, vector<int> b) {
-            return a[0] < b[0];
-        });
+        sort(items.begin(), items.end());
 
         for (int i = 1; i < items.size(); ++i) {
             items[i][1] = max(items[i - 1][1], items[i][1]);
