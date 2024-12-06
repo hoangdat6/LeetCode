@@ -14,8 +14,7 @@ public:
         }
 
         int ans = 0;
-        for(int i = 1; i < n + 1; ++i) {
-            if(maxSum <= 0) break; 
+        for(int i = 1; i < n + 1 && maxSum > 0; ++i) {
             if(check[i] && maxSum - i >= 0) {
                 ans ++;
                 maxSum -= i;
