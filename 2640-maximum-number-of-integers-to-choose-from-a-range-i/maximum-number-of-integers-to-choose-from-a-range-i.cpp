@@ -13,13 +13,12 @@ public:
             }
         }
 
-        int sum = 0;
         int ans = 0;
         for(int i = 1; i < n + 1; ++i) {
-            if(sum >= maxSum) break; 
-            if(check[i] && ((sum + i) <= maxSum)) {
+            if(maxSum <= 0) break; 
+            if(check[i] && maxSum - i >= 0) {
                 ans ++;
-                sum += i;
+                maxSum -= i;
             }
         }
 
