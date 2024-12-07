@@ -1,34 +1,20 @@
 class Solution {
 public:
     int minimumSize(vector<int>& nums, int maxOperations) {
-        int left = 1, right = 0;
-
-        for(auto num : nums) {
-            right = max(num, right);
-        }
-
+        int left = 1, right = 1e9;
+        
         while(left < right) {
-            int mid = (left + right) / 2;
+            int mid = (right + left) / 2, opers = 0;
 
-            if(check(nums, mid, maxOperations)) {
-                right = mid;
-            }else {
-                left = mid + 1;
+            for(auto num : nums) {
+                opers += (num - 1) / mid;
             }
+
+            if(opers > maxOperations) left = mid + 1;
+            else right = mid;
         }
 
         return left;
-    }
-
-    bool check(vector<int>& nums, int max, int maxOperations) {
-        int ops = 0;
-        for(auto num : nums) {
-            int op = ceil(num / (double)max) - 1;
-            ops += op;
-
-            if(ops > maxOperations) return false;
-        }
-
-        return true;
+        
     }
 };
