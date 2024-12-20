@@ -18,26 +18,19 @@ class Solution {
         if(root == null) return new ArrayList();
         List<List<Integer>> ans = new ArrayList<>();
 
-        Queue<TreeNode> queue = new LinkedList<>();
-
-        queue.offer(root);
-
-        while(!queue.isEmpty()) {
-            int level_size = queue.size();
-            List<Integer> level_values = new ArrayList<>();
-
-            for(int i = 0; i < level_size; ++i) {
-                TreeNode node = queue.peek();
-                queue.remove();
-                
-                level_values.add(node.val);
-
-                if(node.left != null) queue.offer(node.left);
-                if(node.right != null) queue.offer(node.right);
-
-            }
-            ans.add(level_values);
-        }
+        bfs(root, ans, 0);
         return ans;
+    }
+
+    private void bfs(TreeNode root, List<List<Integer>> ans, int level) {
+        if(root == null) return;
+
+        if(ans.size() < level + 1) {
+            ans.add(new ArrayList());
+        }
+
+        ans.get(level).add(root.val);
+        bfs(root.left, ans, level + 1);
+        bfs(root.right, ans, level + 1);
     }
 }
