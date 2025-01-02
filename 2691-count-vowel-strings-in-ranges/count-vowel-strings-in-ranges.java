@@ -1,37 +1,24 @@
 class Solution {
+    private static final Set<Character> VOWELS = Set.of('a', 'e', 'i', 'o', 'u');
+
     public int[] vowelStrings(String[] words, int[][] queries) {
         int n = words.length;
-        int m = queries.length;
-        int[] presum =  new int[n + 1];
-        int[] ans =  new int[m];
+        int[] presum = new int[n + 1];
 
-
-        if(isStartEndVowel(words[0])) presum[0] = 1;
-
-        for(int i = 1; i < n; ++i) {
-            if(isStartEndVowel(words[i])) {
-                presum[i] = presum[i - 1] + 1;
-            }else {
-                presum[i] = presum[i - 1];
-            }
+        for (int i = 0; i < n; ++i) {
+            presum[i + 1] = presum[i] + (isStartEndVowel(words[i]) ? 1 : 0);
         }
 
-
-        for(int i = 0; i < m; ++i) {
+        int[] ans = new int[queries.length];
+        for (int i = 0; i < queries.length; ++i) {
             int start = queries[i][0];
             int end = queries[i][1];
-            
-            ans[i] = presum[end];
-            if(start - 1 >= 0) 
-                ans[i] -= presum[start - 1];
+            ans[i] = presum[end + 1] - presum[start];
         }
         return ans;
     }
 
-    private boolean isStartEndVowel(String s){
-        char start = s.charAt(0);
-        char end = s.charAt(s.length() - 1);
-        return (start == 'a' ||  start == 'e' || start == 'i' || start == 'o' || start == 'u')
-            && (end == 'a' || end == 'e' || end == 'i' ||  end == 'o' || end == 'u');
+    private boolean isStartEndVowel(String s) {
+        return VOWELS.contains(s.charAt(0)) && VOWELS.contains(s.charAt(s.length() - 1));
     }
 }
