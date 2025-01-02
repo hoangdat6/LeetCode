@@ -14,11 +14,7 @@ class Solution(object):
                 presum[i + 1] = presum[i] + 1
             else:
                 presum[i + 1] = presum[i]
-
-        result = []
-        for start, end in queries:
-            result.append(presum[end + 1] - presum[start])
         
-        return result
+        return [presum[end + 1] - presum[start] for start, end in queries]
 
         
