@@ -7,7 +7,6 @@ class Solution {
 
 
         if(isStartEndVowel(words[0])) presum[0] = 1;
-        System.out.print(presum[0] + " ");
 
         for(int i = 1; i < n; ++i) {
             if(isStartEndVowel(words[i])) {
@@ -15,8 +14,6 @@ class Solution {
             }else {
                 presum[i] = presum[i - 1];
             }
-
-            System.out.print(presum[i] + " ");
         }
 
 
