@@ -11,9 +11,9 @@ public:
         }
 
         int suffix = 1;
-        for(int i = n - 2; i >= -1; --i) {
-            ans[i + 1] *= suffix;
+        for(int i = n - 2; i >= 0; --i) {
             suffix *= nums[i + 1];
+            ans[i] *= suffix;
         }
 
         return ans;
