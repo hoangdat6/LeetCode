@@ -16,7 +16,6 @@ public:
             suffix *= nums[i + 1];
         }
 
-
         return ans;
     }
 };
