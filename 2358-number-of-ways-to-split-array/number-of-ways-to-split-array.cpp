@@ -2,16 +2,17 @@ class Solution {
 public:
     int waysToSplitArray(vector<int>& nums) {
         int n = nums.size();
-        long prev[n + 1];
-        prev[0] = nums[0];
+        long prevsum = 0;
 
-        for(int i = 1; i < n; ++i) {
-            prev[i] = prev[i - 1] + nums[i];
+        for(int i = 0; i < n; ++i) {
+            prevsum += nums[i];
         }
 
         int ans = 0;
+        long prevsumi = 0;
         for(int i = 0; i < n - 1; ++i) {
-            if(prev[i] >= prev[n - 1] - prev[i]) ans++;
+            prevsumi += nums[i];
+            if(prevsumi >= prevsum - prevsumi) ans++;
         }
 
         return ans;
