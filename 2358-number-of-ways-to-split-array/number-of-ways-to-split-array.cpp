@@ -4,8 +4,8 @@ public:
         int n = nums.size();
         long rightsum = 0, leftsum = 0;
 
-        for(int i = 0; i < n; ++i) {
-            rightsum += nums[i];
+        for (int num : nums) {
+            rightsum += num;
         }
 
         int ans = 0;
