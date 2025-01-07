@@ -7,9 +7,7 @@ class Solution {
 
         for(int i = 1; i < n; ++i) {
             ans[i] += one + ans[i - 1]; 
-            if(boxes.charAt(i) == '1') {
-                ++one; 
-            }
+            if(boxes.charAt(i) == '1') ++one;
         }
         
         one = 0;
