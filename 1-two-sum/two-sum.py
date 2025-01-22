@@ -7,8 +7,8 @@ class Solution:
 
         for i in range(0, len(nums)):
             if (target - nums[i]) in map and i != map[target - nums[i]]:
-                return [i, map[target - nums[i]]]
+                return[i, map[target - nums[i]]]
         else:
-            return []
+            return[]
 
         
