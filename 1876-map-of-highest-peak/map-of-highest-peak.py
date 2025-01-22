@@ -2,8 +2,8 @@ class Solution:
     def highestPeak(self, isWater: List[List[int]]) -> List[List[int]]:
         n = len(isWater)
         m = len(isWater[0])
-        ans = [[-1] * m for i in range(n)]
-        queue = []
+        ans = [[-1] * m for _ in range(n)]
+        queue = deque()
 
         for i in range(0, n):
             for j in range(0, m):
@@ -14,7 +14,7 @@ class Solution:
         directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 
         while queue:
-            cell = queue.pop(0)
+            cell = queue.popleft()
 
             x = cell[0]
             y = cell[1]
