@@ -3,11 +3,13 @@ func tupleSameProduct(nums []int) int {
     ans, n := 0, len(nums)
     for i := 0; i < n; i++ {
         for j := i + 1; j < n; j++ {
-            pairs[nums[i] * nums[j]]++
+            product := nums[i] * nums[j]
+            if pairs[product] > 0 {
+                ans += pairs[product] * 8
+            }
+            pairs[product]++
         }
     }
-    for _, v := range pairs {
-        ans += (v - 1) * v * 4
-    }
+
     return ans
 }
