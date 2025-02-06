@@ -1,16 +1,17 @@
 class Solution:
     def tupleSameProduct(self, nums: List[int]) -> int:
-        n = len(nums)
-        product_count_map = defaultdict(int)
+        map = dict()
         
-        result = 0
+        n = len(nums)
+        ans = 0
         for i in range(n):
             for j in range(i + 1, n):
-                product = nums[i] * nums[j]
-                count = product_count_map[product]
-                if count:
-                    result += 8 * count
-                product_count_map[product] += 1
+                mul = nums[i] * nums[j]
+                cnt = map.get(mul)
+                if cnt:
+                    ans += 8 * cnt
+                    map[mul] += 1
+                else:
+                    map[mul] = 1
         
-        return result
-         
+        return ans
