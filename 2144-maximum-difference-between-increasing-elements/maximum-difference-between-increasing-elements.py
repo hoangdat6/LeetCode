@@ -4,7 +4,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        ans = 0
+        ans = -1
         min_val = nums[0]
 
         for i in range(1, len(nums)):
