@@ -7,9 +7,12 @@ class Solution(object):
         if len(nums) <= 1:
             return -1
         ans = 0
+        min_val = nums[0]
 
-        for i in range(0, len(nums) - 1):
-            for j in range(i + 1, len(nums)):
-                ans = max(ans, nums[j] - nums[i])
+        for i in range(1, len(nums)):
+            if nums[i] > min_val:
+                ans = max(ans, nums[i] - min_val)
+            else:
+                min_val = nums[i]
         
         return ans if ans != 0 else -1
