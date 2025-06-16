@@ -4,8 +4,6 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if len(nums) <= 1:
-            return -1
         ans = 0
         min_val = nums[0]
 
