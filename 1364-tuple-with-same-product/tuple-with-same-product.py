@@ -6,13 +6,16 @@ class Solution(object):
         """
         map = defaultdict(int)
         
+        res = 0
         n = len(nums)
         for i in range(n):
             for j in range(i + 1, n):
-                map[nums[i] * nums[j]] += 1
+                product = nums[i] * nums[j] 
+                if product in map:
+                    res += map[product] * 8
+                map[product] += 1
 
-        res = 0
-        for k, v in map.items():
-            res += v * (v - 1) * 4
+        return res
+
 
         return res
