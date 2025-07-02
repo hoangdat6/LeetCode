@@ -16,6 +16,3 @@ class Solution(object):
                 map[product] += 1
 
         return res
-
-
-        return res
