@@ -1,17 +1,18 @@
-class Solution:
-    def tupleSameProduct(self, nums: List[int]) -> int:
-        map = dict()
+class Solution(object):
+    def tupleSameProduct(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        map = defaultdict(int)
         
         n = len(nums)
-        ans = 0
         for i in range(n):
             for j in range(i + 1, n):
-                mul = nums[i] * nums[j]
-                cnt = map.get(mul)
-                if cnt:
-                    ans += 8 * cnt
-                    map[mul] += 1
-                else:
-                    map[mul] = 1
-        
-        return ans
+                map[nums[i] * nums[j]] += 1
+
+        res = 0
+        for k, v in map.items():
+            res += v * (v - 1) * 4
+
+        return res
